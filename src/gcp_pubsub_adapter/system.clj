@@ -9,7 +9,8 @@
 
 (defn gcp-pubsub-adapter-system
   [{:keys [gcp-pubsub-adapter-project-id
-           gcp-pubsub-adapter-port] :as conf}]
+           gcp-pubsub-adapter-port
+           gcp-pubsub-adapter-lemming-serial] :as conf}]
   (component/system-map
     :pubsub-publisher (pubsub-publisher-component gcp-pubsub-adapter-project-id)
     :lemming-repository (component/using
@@ -22,12 +23,13 @@
                 (end-point-component gcp-pubsub-adapter-port)
                 [:handler])
     :handler (component/using
-               (handler-component)
+               (handler-component gcp-pubsub-adapter-lemming-serial)
                [:lemming-usecase])))
 
 (defn load-config []
   {:gcp-pubsub-adapter-project-id (env :gcp-pubsub-adapter-project-id)
-   :gcp-pubsub-adapter-port (or (env :gcp-pubsub-adapter-port) 8080)})
+   :gcp-pubsub-adapter-port (-> (or (env :gcp-pubsub-adapter-port) "8080") Integer/parseInt)
+   :gcp-pubsub-adapter-lemming-serial (env :gcp-pubsub-adapter-lemming-serial)})
 
 (defn -main []
   (component/start

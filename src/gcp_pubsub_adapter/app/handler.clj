@@ -6,13 +6,16 @@
             [gcp-pubsub-adapter.domain.usecase.lemming-usecase :as lemming-usecase]))
 
 (defn post-lemming
-  [{:keys [lemming-usecase] :as comp} req]
-  (-> (lemming-usecase/publish-message
-        lemming-usecase
-        (generate-string (:body req))))
-  "Success!\n")
+  [{:keys [lemming-serial lemming-usecase] :as comp} serial req]
+  (if (= lemming-serial serial)
+    (do
+      (-> (lemming-usecase/publish-message
+            lemming-usecase
+            (generate-string (:body req))))
+      "Success!\n")
+    "Serial number has wrong.\n"))
 
-(defrecord HandlerComponent [lemming-usecase]
+(defrecord HandlerComponent [leimming-serial lemming-usecase]
   component/Lifecycle
   (start [this]
     (println ";; Starting HandlerComponent")
@@ -21,5 +24,6 @@
     (println ";; Stopping HandlerComponent")
     this))
 
-(defn handler-component []
-  (map->HandlerComponent {}))
+(defn handler-component
+  [lemming-serial]
+  (map->HandlerComponent {:lemming-serial lemming-serial}))
