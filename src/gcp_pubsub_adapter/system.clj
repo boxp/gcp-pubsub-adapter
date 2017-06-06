@@ -5,7 +5,8 @@
             [gcp-pubsub-adapter.infra.repository.lemming-repository :refer [lemming-repository-component]]
             [gcp-pubsub-adapter.domain.usecase.lemming-usecase :refer [lemming-usecase-component]]
             [gcp-pubsub-adapter.app.handler :refer [handler-component]]
-            [gcp-pubsub-adapter.app.endpoint :refer [end-point-component]]))
+            [gcp-pubsub-adapter.app.endpoint :refer [end-point-component]])
+  (:gen-class))
 
 (defn gcp-pubsub-adapter-system
   [{:keys [gcp-pubsub-adapter-project-id
