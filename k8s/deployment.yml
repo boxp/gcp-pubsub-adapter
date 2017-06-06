@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gcp-pubsub-adapter
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: gcp-pubsub-adapter
+    spec:
+      containers:
+      - name: gcp-pubsub-adapter
+        image: asia.gcr.io/boxp-tk/gcp-pubsub-adapter:${CIRCLE_SHA1}
+        env:
+          - name: GCP_PUBSUB_ADAPTER_PROJECT_ID
+            valueFrom:
+              secretKeyRef:
+                name: gcp-pubsub-adapter
+                key: project-id
+          - name: GCP_PUBSUB_ADAPTER_PORT
+            valueFrom:
+              secretKeyRef:
+                name: gcp-pubsub-adapter
+                key: port
+          - name: GCP_PUBSUB_ADAPTER_LEMMING_SERIAL
+            valueFrom:
+              secretKeyRef:
+                name: gcp-pubsub-adapter
+                key: lemming-serial
