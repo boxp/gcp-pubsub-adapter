@@ -12,6 +12,8 @@ spec:
       containers:
       - name: gcp-pubsub-adapter
         image: asia.gcr.io/boxp-tk/gcp-pubsub-adapter:${CIRCLE_SHA1}
+        ports:
+        - containerPort: 8080
         env:
           - name: GCP_PUBSUB_ADAPTER_PROJECT_ID
             valueFrom:
