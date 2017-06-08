@@ -1,5 +1,7 @@
 # gcp-pubsub-adapter
 
+[![CircleCI](https://circleci.com/gh/boxp/gcp-pubsub-adapter.svg?style=svg)](https://circleci.com/gh/boxp/gcp-pubsub-adapter)
+
 A Clojure library designed to ... well, that part is up to you.
 
 ## Usage
