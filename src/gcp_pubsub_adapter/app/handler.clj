@@ -5,6 +5,10 @@
             [cheshire.core :refer [generate-string]]
             [gcp-pubsub-adapter.domain.usecase.lemming-usecase :as lemming-usecase]))
 
+(defn get-index
+  [req]
+  "OK\n")
+
 (defn post-lemming
   [{:keys [lemming-serial lemming-usecase] :as comp} serial req]
   (if (= lemming-serial serial)

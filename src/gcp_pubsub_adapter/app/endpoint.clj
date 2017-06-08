@@ -12,6 +12,7 @@
 (defn main-routes
   [{:keys [handler] :as comp}]
   (routes
+    (GET "/" [req] (handler/get-index req))
     (POST "/lemming/:serial" [serial :as req] (handler/post-lemming handler serial req))
     (route/not-found "<h1>404 page not found</h1>")))
 
