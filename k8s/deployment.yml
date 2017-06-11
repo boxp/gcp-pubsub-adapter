@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: gcp-pubsub-adapter
 spec:
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:
