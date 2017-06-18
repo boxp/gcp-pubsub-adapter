@@ -14,6 +14,7 @@
   (routes
     (GET "/" [req] (handler/get-index req))
     (POST "/lemming/:serial" [serial :as req] (handler/post-lemming handler serial req))
+    (GET "/lemming/:serial" [serial] (handler/get-to-lemming handler serial))
     (route/not-found "<h1>404 page not found</h1>")))
 
 (defn app

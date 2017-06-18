@@ -3,7 +3,7 @@
            (com.google.cloud.pubsub.spi.v1 TopicAdminClient)
            (com.google.pubsub.v1 TopicName))
   (:require [com.stuartsierra.component :as component]
-            [gcp-pubsub-adapter.infra.datasource.pubsub :refer [create-topic publish]]))
+            [gcp-pubsub-adapter.infra.datasource.pubsub :refer [create-publisher publish]]))
 
 (def topic-key :lemming)
 
@@ -18,7 +18,7 @@
   (start [this]
     (println ";; Starting LemmingRepositoryComponent")
     (-> this
-        (update :pubsub-publisher #(create-topic % topic-key))))
+        (update :pubsub-publisher #(create-publisher % topic-key))))
   (stop [this]
     (println ";; Stopping LemmingRepositoryComponent")
     (-> this
