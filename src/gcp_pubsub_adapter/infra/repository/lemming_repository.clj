@@ -22,7 +22,7 @@
   (stop [this]
     (println ";; Stopping LemmingRepositoryComponent")
     (-> this
-        (dissoc pubsub-publisher))))
+        (dissoc :pubsub-publisher))))
 
 (defn lemming-repository-component []
   (map->LemmingRepositoryComponent {}))
